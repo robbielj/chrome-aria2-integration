@@ -50,7 +50,7 @@ chrome.contextMenus.create(
 ); 
 
 chrome.contextMenus.onClicked.addListener(function(info, tab){
-	if (tab.id = "linkclick") {
+	if (info.menuItemId == "linkclick") {
 		var aria2 = new ARIA2(settings.get('rpcpath'));
 		var params = RULE(info,tab);
 		aria2.addUri(info.linkUrl, params);

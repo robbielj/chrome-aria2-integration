@@ -1,6 +1,6 @@
 {
   "name": "Aria2c Integration",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "manifest_version": 2,
   "description": "Download files with aria2",
   "icons": {
