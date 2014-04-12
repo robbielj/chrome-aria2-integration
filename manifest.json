@@ -1,6 +1,6 @@
 {
   "name": "Aria2c Integration",
-  "version": "1.0.4",
+  "version": "1.2.0",
   "manifest_version": 2,
   "description": "Download files with aria2",
   "icons": {
@@ -16,7 +16,9 @@
   "options_page": "settings.html",
   "permissions": [
     "contextMenus",
-    "tabs"
+    "activeTab",
+    "downloads",
+    "notifications"
   ],
   "content_scripts": [
     {
