@@ -1,6 +1,6 @@
 {
   "name": "Aria2c Integration",
-  "version": "1.2.0",
+  "version": "1.2.4",
   "manifest_version": 2,
   "description": "Download files with aria2",
   "icons": {
@@ -10,7 +10,7 @@
   },
   "default_locale": "en",
   "background": {
-    "page": "main.html",
+    "scripts": [ "store.js", "main.js" ],
     "persistent": false
   },
   "options_page": "settings.html",
