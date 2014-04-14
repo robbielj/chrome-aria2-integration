@@ -4,7 +4,9 @@ var settings = new Store('settings', {
         "filesizesetting" : "500M",
         "whitelisttype" : "",
         "whitelistsite" : "",
-        "blacklistsite" : ""
+        "blacklistsite" : "",
+        "captureCheckbox" : true,
+        "sizecaptureCheckbox" : true
     });
 
 //Binux 
@@ -49,7 +51,7 @@ function showNotification() {
     var notfopt = {
             type: "basic",
             title: "Aria2 Integration",
-            iconUrl: "icons/icon64.png",
+            iconUrl: "icons/notificationicon.png",
             message: "The download has been sent to aria2 queue"
         };
     chrome.notifications.create("senttoaria2", notfopt, function () {return; });
@@ -82,34 +84,32 @@ chrome.contextMenus.onClicked.addListener(function (info, tab) {
 });
 
 //Auto capture module
+function sitelistProc(list) {
+	var re_list;
+    if (list === '') {
+        re_list = new RegExp('^\\s$', "g");
+    } else {
+        list = list.replace(/\./g, "\\.");
+        list = list.replace(/\,/g, "|");
+        list = list.replace(/\*/g, "[^ ]*");
+        re_list = new RegExp(list, "gi");
+    }
+    return re_list;
+}
+
 function isCapture(size, url, name) {
     "use strict";
     var bsites = settings.get('blacklistsite'), wsites = settings.get('whitelistsite');
-    var bsitesrep, re_bsites, wsitesrep, re_wsites, res;
+    var re_bsites = sitelistProc(bsites), re_wsites = sitelistProc(wsites);
 
-    if (bsites === '') {
-        re_bsites = new RegExp('^\\s$', "g");
-    } else {
-        bsitesrep = bsites.replace(/\./g, "\\.");
-        bsitesrep = bsitesrep.replace(/\,/g, "|");
-        bsitesrep = bsitesrep.replace(/\*/g, "[^ ]*");
-        re_bsites = new RegExp(bsitesrep, "gi");
-    }
-
-    if (wsites === '') {
-        re_wsites = new RegExp('^\\s$', "gi");
-    } else {
-        wsitesrep = wsites.replace(/\./g, "\\.");
-        wsitesrep = wsitesrep.replace(/\,/g, "|");
-        wsitesrep = wsitesrep.replace(/\*/g, "[^ ]*");
-        re_wsites = new RegExp(wsitesrep, "gi");
-    }
     var ftypes = settings.get('whitelisttype').toLowerCase();
     var Intype = ftypes.indexOf(name.split('.').pop().toLowerCase());
+    
     var thsize = settings.get('filesizesetting');
     var thsizeprec = ['K', 'M', 'G', 'T'];
     var thsizebytes = thsize.match(/[\d\.]+/)[0] * Math.pow(1024, thsizeprec.indexOf(thsize.match(/[a-zA-Z]+/)[0].toUpperCase()) + 1);
 
+    var res;
     switch (true) {
     case re_bsites.test(url):
         res = 0;
@@ -120,7 +120,7 @@ function isCapture(size, url, name) {
     case (Intype !== -1):
         res = 1;
         break;
-    case (size >= thsizebytes):
+    case (size >= thsizebytes && settings.get('sizecaptureCheckbox')):
         res = 1;
         break;
     default:
@@ -143,19 +143,22 @@ function captureAdd(Item, resp) {
     }
 }
 
+
 chrome.downloads.onDeterminingFilename.addListener(function (Item, s) {
     "use strict";
-    chrome.tabs.query({active: true, currentWindow: true}, function (tabs) {
-        chrome.tabs.sendMessage(tabs[0].id, {range: "both"}, function (response) {
-            if (response === undefined) {
-                chrome.tabs.sendMessage(tabs[0].openerTabId, {range: "both"}, function (response) {
+    if (settings.get('captureCheckbox')) {
+        chrome.tabs.query({active: true, currentWindow: true}, function (tabs) {
+            chrome.tabs.sendMessage(tabs[0].id, {range: "both"}, function (response) {
+                if (response === undefined) {
+                    chrome.tabs.sendMessage(tabs[0].openerTabId, {range: "both"}, function (response) {
+                        captureAdd(Item, response);
+                    });
+                    chrome.downloads.cancel(Item.id);
+                    chrome.tabs.remove(tabs[0].id);
+                } else {
                     captureAdd(Item, response);
-                });
-                chrome.downloads.cancel(Item.id);
-                chrome.tabs.remove(tabs[0].id);
-            } else {
-                captureAdd(Item, response);
-            }
+                }
+            });
         });
-    });
+    }
 });

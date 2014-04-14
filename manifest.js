@@ -21,8 +21,22 @@ this.manifest = {
             "type": "description",
             "text": i18n.get("rpctokenDescription")
         },
+		{
+            "tab": i18n.get("capture"),
+            "name": "captureCheckbox",
+            "type": "checkbox",
+            "label": i18n.get("enablecap")
+        },
+		{
+            "tab": i18n.get("capture"),
+            "group": i18n.get("sizerule"),
+            "name": "sizecaptureCheckbox",
+            "type": "checkbox",
+            "label": "Enable"
+        },
         {
             "tab": i18n.get("capture"),
+            "group": i18n.get("sizerule"),
             "name": "filesizesetting",
             "type": "text",
             "label": i18n.get("filesize"),
@@ -30,6 +44,7 @@ this.manifest = {
         },
         {
             "tab": i18n.get("capture"),
+            "group": i18n.get("sizerule"),
             "name": "filesizeDescription",
             "type": "description",
             "text": i18n.get("filesizeDescription")

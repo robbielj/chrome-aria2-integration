@@ -20,14 +20,20 @@ this.i18n = {
 	"capture": {
 		"en": "Capture"
 	},
+	"enablecap": {
+		"en": "Enable Capture"
+	},
+	"sizerule": {
+		"en": "File Size"
+	},
 	"filesize": {
 		"en": "File Size >="
 	},
 	"filesizeDescription": {
-		"en": "A file with size larger than this value is automatically sent to aria2. <br \>Default value: 500M, Available Metrics: K, M, G, T"
+		"en": "If enabled, downloading a file with size larger than this value is automatically captured by aria2. <br \>Default value: 500M, Available Metrics: K, M, G, T"
 	},
 	"whitelisttype": {
-		"en": "File Types Exceptions"
+		"en": "File Types"
 	},
 	"whitelisttypeDescription": {
 		"en": "These file types are <u>always handled</u> by aria2, <u>regardless of size</u>. <br \> Example: rar,zip"
@@ -36,12 +42,12 @@ this.i18n = {
 		"en": "Site Whitelist"
 	},
 	"whitelistsiteDescription": {
-		"en": "Downloads from these sites are <u>always handled</u> by aria2, <u>regardless of type and size</u>.<br \>Example: microsoft.com, download.windowsupdate.com"
+		"en": "Downloads from these sites are <u>always handled</u> by aria2, <u>regardless of type and size</u>.<br \>Example: microsoft.com, download.windowsupdate.com, google.*"
 	},
 	"blacklistsite": {
 		"en": "Site Blacklist"
 	},
 	"blacklistsiteDescription": {
-		"en": "Downloads from these sites are <u>always ignored</u> by aria2, <u>regardless of type and size</u>. <br \>Example: microsoft.com, download.windowsupdate.com"
+		"en": "Downloads from these sites are <u>always ignored</u> by aria2, <u>regardless of type and size</u>. <br \>Example: microsoft.com, download.windowsupdate.com, google.*"
 	},
 };
