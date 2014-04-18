@@ -9,6 +9,9 @@ var settings = new Store('settings', {
         "sizecaptureCheckbox" : true
     });
 
+chrome.storage.local.set({"rpcpath":settings.get('rpcpath')});
+chrome.storage.local.set({"rpctoken":settings.get('rpctoken')});
+
 //Binux 
 //https://github.com/binux
 

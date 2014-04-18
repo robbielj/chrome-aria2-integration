@@ -42,12 +42,12 @@ this.i18n = {
 		"en": "Site Whitelist"
 	},
 	"whitelistsiteDescription": {
-		"en": "Downloads from these sites are <u>always handled</u> by aria2, <u>regardless of type and size</u>.<br \>Example: microsoft.com, download.windowsupdate.com, google.*"
+		"en": "Downloads from these sites are <u>always handled</u> by aria2, <u>regardless of type or size</u>.<br \>Example: microsoft.com, download.windowsupdate.com, google.*"
 	},
 	"blacklistsite": {
 		"en": "Site Blacklist"
 	},
 	"blacklistsiteDescription": {
-		"en": "Downloads from these sites are <u>always ignored</u> by aria2, <u>regardless of type and size</u>. <br \>Example: microsoft.com, download.windowsupdate.com, google.*"
+		"en": "Downloads from these sites are <u>always ignored</u> by aria2, <u>regardless of type or size</u>. <br \>Example: microsoft.com, download.windowsupdate.com, google.*"
 	},
 };
