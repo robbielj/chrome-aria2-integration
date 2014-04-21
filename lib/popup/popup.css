@@ -1,0 +1,45 @@
+/*popup*/
+#purgebtn {
+    margin: auto auto auto 5px;
+    border: 0;
+    border: 1px solid #CCC;
+    border-radius: 3px;
+    background-color: white;
+    padding: 2px;
+    float: right;
+    font-weight: bold;
+}
+
+div[id^="taskInfo_"] {
+    font-size: 13px;
+}
+
+div[id^="taskBar_"] {
+    margin-bottom: 30px;
+}
+
+.tasktitle{
+	font-size: 15px !important;
+	font-weight: bold;
+	word-break: break-all !important;
+}
+
+button[id^="removebtn_"]{
+    margin: auto auto auto 5px;
+    font-size: 0.6em;
+    border: 0;
+    border: 1px solid #CCC;
+    border-radius: 3px;
+    background-color: white;
+    padding: 1px;
+}
+
+
+.complete_info2{
+	display: none;
+}
+
+body {
+  min-width:357px;
+  overflow-x:hidden;
+}

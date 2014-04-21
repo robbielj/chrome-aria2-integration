@@ -155,9 +155,8 @@ chrome.downloads.onDeterminingFilename.addListener(function (Item, s) {
                 if (response === undefined) {
                     chrome.tabs.sendMessage(tabs[0].openerTabId, {range: "both"}, function (response) {
                         captureAdd(Item, response);
+                        chrome.tabs.remove(tabs[0].id);
                     });
-                    chrome.downloads.cancel(Item.id);
-                    chrome.tabs.remove(tabs[0].id);
                 } else {
                     captureAdd(Item, response);
                 }

@@ -2,28 +2,29 @@
 <html>
 <head>
 <link rel="stylesheet" href="lib/popup/popup.css">
-<script src="lib/popup/popuplib.js"></script>
+<script src="lib/popup/popuplib.min.js"></script>
 </head>
 <body>
+<div id="WEBUI"></div>
 <div id="globalstat"></div>
 <div id="activetpl"></div>
 <div id="waitingtpl"></div>
 <div id="stoppedtpl"></div>
-
+</div>
 <script id="headInfo" type="x-tmpl-mustache">
 {{> globspeed}}/s
-<span id=purgebutton><input id="purgebtn" type="button" value="Purge!" onclick="doFunction();" /></span>
+<button id=purgebtn>Purge!</button>
 <br /><hr>
 </script>
 
 <script id="taskInfo" type="x-tmpl-mustache">
 <div id=taskInfo_{{gid}}>
-	<div class=tasktitle>[{{> displayName}}]</div>
+	<div class=tasktitle>[{{> displayName}}]<button id=removebtn_{{gid}} class={{status}}>remove</button></div>
 	<div class={{status}}_info1>{{> statusUpper}}, {{> clengthPrec}}/{{> tlengthPrec}}/{{> completeRatio}}%</div>
 	<div class={{status}}_info2>{{connections}} conns, {{> dlspeedPrec}}/s, ETA: {{> eta}}</div>
 </div>
-{{> barhtml}}
+<div id=taskBar_{{gid}} class={{status}}></div>
 </script>
-<script src="lib/popup/popup.js"></script>
+<script src="lib/popup/popup.min.js"></script>
 </body>
 </html>
