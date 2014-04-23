@@ -5,25 +5,20 @@
 <script src="lib/popup/popuplib.min.js"></script>
 </head>
 <body>
-<div id="WEBUI"></div>
 <div id="globalstat"></div>
-<div id="activetpl"></div>
-<div id="waitingtpl"></div>
-<div id="stoppedtpl"></div>
-</div>
+<div id="tasklist"></div>
 <script id="headInfo" type="x-tmpl-mustache">
 {{> globspeed}}/s
 <button id=purgebtn>Purge!</button>
 <br /><hr>
 </script>
-
 <script id="taskInfo" type="x-tmpl-mustache">
 <div id=taskInfo_{{gid}}>
-	<div class=tasktitle>[{{> displayName}}]<button id=removebtn_{{gid}} class={{status}}>remove</button></div>
+	<div class=tasktitle>[{{> displayName}}]<button id=removebtn_{{gid}} class="{{status}} removebtn">remove</button></div>
 	<div class={{status}}_info1>{{> statusUpper}}, {{> clengthPrec}}/{{> tlengthPrec}}/{{> completeRatio}}%</div>
 	<div class={{status}}_info2>{{connections}} conns, {{> dlspeedPrec}}/s, ETA: {{> eta}}</div>
 </div>
-<div id=taskBar_{{gid}} class={{status}}></div>
+<div id=taskBar_{{gid}} class="{{status}} progbar" style=width:{{>p}}></div>
 </script>
 <script src="lib/popup/popup.min.js"></script>
 </body>

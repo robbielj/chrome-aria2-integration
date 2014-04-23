@@ -14,8 +14,27 @@ div[id^="taskInfo_"] {
     font-size: 13px;
 }
 
-div[id^="taskBar_"] {
-    margin-bottom: 30px;
+.progbar {
+	height: 20px;
+	margin-top: 2px;
+    margin-bottom: 10px;
+    transition: width 1s;
+}
+
+.active, .paused, .waiting {
+	background-color: #ACF;
+}
+
+.error {
+	background-color: #EA6A6A;
+}
+
+.complete {
+	background-color: #8AE62E;
+}
+
+.removed {
+	background-color: #ECECEC;
 }
 
 .tasktitle{
