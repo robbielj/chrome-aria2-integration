@@ -12,6 +12,7 @@
 
 div[id^="taskInfo_"] {
     font-size: 13px;
+    max-width: 330px;
 }
 
 .progbar {
@@ -19,6 +20,7 @@ div[id^="taskInfo_"] {
 	margin-top: 2px;
     margin-bottom: 10px;
     transition: width 1s;
+    max-width: 350px;
 }
 
 .active, .paused, .waiting {
@@ -43,7 +45,7 @@ div[id^="taskInfo_"] {
 	word-break: break-all !important;
 }
 
-button[id^="removebtn_"]{
+.removebtn{
     margin: auto auto auto 5px;
     font-size: 0.6em;
     border: 0;

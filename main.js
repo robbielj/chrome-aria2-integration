@@ -1,5 +1,6 @@
 var settings = new Store('settings', {
         "rpcpath" : "http://localhost:6800/jsonrpc",
+        "rpcuser" : "",
         "rpctoken" : "",
         "filesizesetting" : "500M",
         "whitelisttype" : "",
@@ -10,6 +11,7 @@ var settings = new Store('settings', {
     });
 
 chrome.storage.local.set({"rpcpath":settings.get('rpcpath')});
+chrome.storage.local.set({"rpcuser":settings.get('rpcuser')});
 chrome.storage.local.set({"rpctoken":settings.get('rpctoken')});
 
 //Binux 
@@ -33,16 +35,19 @@ var ARIA2 = (function () {
             }
             xhr.open("POST", jsonrpc_path + "?tm=" + (new Date()).getTime().toString(), true);
             xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
-            if (auth) {
-                xhr.setRequestHeader("Authorization", "Basic " + btoa(auth));
+            if (settings.get('rpcuser')) {
+            	xhr.setRequestHeader("Authorization", "Basic " + btoa(settings.get('rpcuser') + ':' + settings.get('rpctoken')));
+            } else {
+            	if (settings.get('rpctoken')) {
+            		request_obj.params = ['token:' + settings.get('rpctoken')].concat(request_obj.params);
+            	}
             }
             xhr.send(JSON.stringify(request_obj));
         }
-
         return function (jsonrpc_path) {
             this.jsonrpc_path = jsonrpc_path;
             this.addUri = function (uri, options) {
-                request(this.jsonrpc_path, 'aria2.addUri', ['token:' + settings.get('rpctoken'), [uri], options]);
+                request(this.jsonrpc_path, 'aria2.addUri', [[uri], options]);
             };
             return this;
         };

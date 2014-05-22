@@ -11,6 +11,18 @@ this.manifest = {
         },
         {
             "tab": i18n.get("RPC"),
+            "name": "rpcuser",
+            "type": "text",
+            "label": i18n.get("RPCUser")
+        },
+        {
+            "tab": i18n.get("RPC"),
+            "name": "rpcuserDescription",
+            "type": "description",
+            "text": i18n.get("rpcuserDescription")
+        },
+        {
+            "tab": i18n.get("RPC"),
             "name": "rpctoken",
             "type": "text",
             "label": i18n.get("RPCToken")
@@ -20,6 +32,12 @@ this.manifest = {
             "name": "rpctokenDescription",
             "type": "description",
             "text": i18n.get("rpctokenDescription")
+        },
+        {
+            "tab": i18n.get("RPC"),
+            "name": "rpcsettingsDescription",
+            "type": "description",
+            "text": i18n.get("rpcsettingsDescription")
         },
 		{
             "tab": i18n.get("capture"),
@@ -92,6 +110,7 @@ this.manifest = {
     "alignment": [
         [
             "rpcpath",
+            "rpcuser",
             "rpctoken"
         ],
         [

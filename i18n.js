@@ -11,11 +11,20 @@ this.i18n = {
 	"JSONRPCPathExample": {
         "en": "http://localhost:6800/jsonrpc"
     },
+	"RPCUser": {
+        "en": "RPC User"
+    },
+	"rpcuserDescription": {
+        "en": "Leave it blank unless you have specified <b><i>rpc-user</i></b>."
+    },
 	"RPCToken": {
         "en": "RPC Secret"
     },
     "rpctokenDescription": {
-        "en": "This is optional, set with --rpc-secret in config file of aria2."
+        "en": "<b><i>rpc-passwd</i></b>/<b><i>rpc-secret</i></b> or leave it blank if neither is specified."
+    },
+	"rpcsettingsDescription": {
+        "en": "<br \>aria2 1.15.2+ is required. Run aria2 with <b><i>enable-rpc=true</i></b>, <b><i>rpc-allow-origin-all=true</i></b> and <b><i>rpc-listen-all=true</i></b>."
     },
 	"capture": {
 		"en": "Capture"
