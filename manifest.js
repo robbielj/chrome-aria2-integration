@@ -25,7 +25,8 @@ this.manifest = {
             "tab": i18n.get("RPC"),
             "name": "rpctoken",
             "type": "text",
-            "label": i18n.get("RPCToken")
+            "label": i18n.get("RPCToken"),
+            "masked": true
         },
         {
             "tab": i18n.get("RPC"),

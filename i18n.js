@@ -24,7 +24,7 @@ this.i18n = {
         "en": "<b><i>rpc-passwd</i></b>/<b><i>rpc-secret</i></b> or leave it blank if neither is specified."
     },
 	"rpcsettingsDescription": {
-        "en": "<br \>aria2 1.15.2+ is required. Run aria2 with <b><i>enable-rpc=true</i></b>, <b><i>rpc-allow-origin-all=true</i></b> and <b><i>rpc-listen-all=true</i></b>."
+        "en": "<br \>Note: aria2 1.15.2+ is required. Run aria2 with <b><i>enable-rpc=true</i></b>, <b><i>rpc-allow-origin-all=true</i></b> and <b><i>rpc-listen-all=true</i></b>."
     },
 	"capture": {
 		"en": "Capture"

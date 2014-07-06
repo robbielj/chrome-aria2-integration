@@ -23,8 +23,12 @@ div[id^="taskInfo_"] {
     max-width: 350px;
 }
 
-.active, .paused, .waiting {
+.active, .waiting {
 	background-color: #ACF;
+}
+
+.paused {
+	background-color: #FFE573;
 }
 
 .error {
