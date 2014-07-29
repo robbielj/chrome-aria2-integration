@@ -119,6 +119,9 @@ function isCapture(size, url, name) {
 
     var res;
     switch (true) {
+    case url.substring(0,5) === 'blob:':
+    	res = 0;
+    	break;
     case re_bsites.test(url):
         res = 0;
         break;
