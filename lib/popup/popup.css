@@ -1,13 +1,48 @@
 /*popup*/
-#purgebtn {
+#purgebtn, #addbtn {
     margin: auto auto auto 5px;
-    border: 0;
     border: 1px solid #CCC;
     border-radius: 3px;
     background-color: white;
     padding: 2px;
     float: right;
     font-weight: bold;
+}
+
+#globalstat {
+	display:inline-block;
+}
+
+#taskaddbox {
+    width: 70%;
+    margin-bottom: 15px;
+    display: inline-block;
+}
+
+#taskaddbatch {
+	display: none;
+	width: 70%;
+	margin-bottom: 15px;
+	float: left;
+}
+
+#addmore{
+    margin: auto auto auto 5px;
+    font-size: 0.8em;
+    border: 1px solid #CCC;
+    border-radius: 3px;
+    background-color: white;
+    padding: 3px;
+}
+
+#addsubmit {
+    margin: auto auto auto 5px;
+    font-size: 0.8em;
+    border: 1px solid #CCC;
+    border-radius: 3px;
+    background-color: #6C788E;
+    color: white;
+    padding: 3px;
 }
 
 div[id^="taskInfo_"] {
@@ -49,10 +84,9 @@ div[id^="taskInfo_"] {
 	word-break: break-all !important;
 }
 
-.removebtn{
+.removebtn {
     margin: auto auto auto 5px;
     font-size: 0.6em;
-    border: 0;
     border: 1px solid #CCC;
     border-radius: 3px;
     background-color: white;
@@ -65,6 +99,6 @@ div[id^="taskInfo_"] {
 }
 
 body {
-  min-width:357px;
-  overflow-x:hidden;
+	min-width:357px;
+	overflow-x:hidden;
 }

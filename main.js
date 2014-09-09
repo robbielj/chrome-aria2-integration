@@ -148,9 +148,8 @@ function captureAdd(Item, resp) {
         params.referer = resp.taburl;
         params.header = "Cookie:" + resp.pagecookie;
         params.out = Item.filename;
-        aria2.addUri(Item.url, params);
+        chrome.downloads.cancel(Item.id, function() {aria2.addUri(Item.url, params);});
         //console.log(Item);
-        chrome.downloads.cancel(Item.id);
         showNotification();
     }
 }
@@ -158,7 +157,7 @@ function captureAdd(Item, resp) {
 
 chrome.downloads.onDeterminingFilename.addListener(function (Item, s) {
     "use strict";
-    //console.log(Item);
+    console.log(Item);
     if (settings.get('captureCheckbox')) {
         chrome.tabs.query({active: true, currentWindow: true}, function (tabs) {
             chrome.tabs.sendMessage(tabs[0].id, {range: "both"}, function (response) {
