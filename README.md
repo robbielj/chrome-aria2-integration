@@ -3,6 +3,8 @@ chrome-aria2-integration
 
 aria2 integration extension for Chrome
 
+Web Store: http://chrome.google.com/webstore/detail/aria2c-integration/edcakfpjaobkpdfpicldlccdffkhpbfk
+
 This extension captures new download tasks and sends them to aria2 automatically, as per capturing rules you set (file size, file type, site whitelist, site blacklist)
 
 It also adds a context menu item. Right click any link and select "Download with aria2" to add the link to aria2 download queue.
