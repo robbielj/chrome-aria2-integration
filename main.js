@@ -105,7 +105,7 @@ function sitelistProc(list) {
     return re_list;
 }
 
-function isCapture(size, url, name) {
+function isCapture(size, taburl, url, name) {
     "use strict";
     var bsites = settings.get('blacklistsite'), wsites = settings.get('whitelistsite');
     var re_bsites = sitelistProc(bsites), re_wsites = sitelistProc(wsites);
@@ -122,10 +122,10 @@ function isCapture(size, url, name) {
     case url.substring(0,5) === 'blob:':
     	res = 0;
     	break;
-    case re_bsites.test(url):
+    case re_bsites.test(taburl):
         res = 0;
         break;
-    case re_wsites.test(url):
+    case re_wsites.test(taburl):
         res = 1;
         break;
     case (Intype !== -1):
@@ -143,7 +143,7 @@ function isCapture(size, url, name) {
 
 function captureAdd(Item, resp) {
     "use strict";
-    if (isCapture(Item.fileSize, resp.taburl, Item.filename) === 1) {
+    if (isCapture(Item.fileSize, resp.taburl, Item.url, Item.filename) === 1) {
         var aria2 = new ARIA2(settings.get('rpcpath')), params = {};
         params.referer = resp.taburl;
         params.header = "Cookie:" + resp.pagecookie;
@@ -157,7 +157,7 @@ function captureAdd(Item, resp) {
 
 chrome.downloads.onDeterminingFilename.addListener(function (Item, s) {
     "use strict";
-    console.log(Item);
+    //console.log(Item);
     if (settings.get('captureCheckbox')) {
         chrome.tabs.query({active: true, currentWindow: true}, function (tabs) {
             chrome.tabs.sendMessage(tabs[0].id, {range: "both"}, function (response) {
