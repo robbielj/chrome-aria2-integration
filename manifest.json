@@ -18,9 +18,12 @@
   "permissions": [
     "contextMenus",
     "activeTab",
+    "tabs",
     "downloads",
     "notifications",
-    "storage"
+    "storage",
+    "cookies",
+    "*://*/"
   ],
   "browser_action": {
    "default_icon": {
