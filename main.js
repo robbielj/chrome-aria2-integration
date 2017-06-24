@@ -79,17 +79,37 @@ chrome.contextMenus.onClicked.addListener(function (info, tab) {
     "use strict";
     if (info.menuItemId === "linkclick") {
         chrome.tabs.query({active: true, currentWindow: true}, function (tabs) {
-            chrome.tabs.sendMessage(tabs[0].id, {range: "cookie"}, function (response) {
-                var aria2 = new ARIA2(settings.get('rpcpath')),
+
+            getCookies(info.linkUrl, function (cookies) {
+
+                var aria2 = new ARIA2(settings.get('rpcpath')), 
                     params = {};
-                params.referer = tab.url;
-                params.header = "Cookie:" + response.pagecookie;
+            
+                params.referer = tabs[0].url;
+                params.header = "Cookie:" + cookies
+
                 aria2.addUri(info.linkUrl, params);
-                showNotification();
+                showNotification();  
             });
         });
     }
 });
+
+
+function getCookies(url, callback) {
+
+    var result = '';
+
+    chrome.cookies.getAll({'url': url} , function (cookies) {
+        
+        for (i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i];
+            result += cookie.name + '=' + cookie.value + ';';
+        }
+
+        callback(result)
+    })
+}
 
 //Auto capture module
 function sitelistProc(list) {
@@ -141,16 +161,26 @@ function isCapture(size, taburl, url, name) {
     return res;
 }
 
-function captureAdd(Item, resp) {
+function captureAdd(Item, taburl) {
     "use strict";
-    if (isCapture(Item.fileSize, resp.taburl, Item.url, Item.filename) === 1) {
-        var aria2 = new ARIA2(settings.get('rpcpath')), params = {};
-        params.referer = resp.taburl;
-        params.header = "Cookie:" + resp.pagecookie;
-        params.out = Item.filename;
-        chrome.downloads.cancel(Item.id, function() {aria2.addUri(Item.url, params);});
-        //console.log(Item);
-        showNotification();
+    if (isCapture(Item.fileSize, taburl, Item.url, Item.filename) === 1) {
+        
+        getCookies(Item.url, function(cookies) {
+
+            var aria2 = new ARIA2(settings.get('rpcpath')), 
+                params = {};
+            
+            params.referer = taburl;
+            params.header = "Cookie:" + cookies;
+            params.out = Item.filename;
+
+            chrome.downloads.cancel(Item.id, function() {
+                aria2.addUri(Item.url, params);
+            });
+
+            //console.log(Item);
+            showNotification();
+        });
     }
 }
 
@@ -159,17 +189,9 @@ chrome.downloads.onDeterminingFilename.addListener(function (Item, s) {
     "use strict";
     //console.log(Item);
     if (settings.get('captureCheckbox')) {
-        chrome.tabs.query({active: true, currentWindow: true}, function (tabs) {
-            chrome.tabs.sendMessage(tabs[0].id, {range: "both"}, function (response) {
-                if (response === undefined) {
-                    chrome.tabs.sendMessage(tabs[0].openerTabId, {range: "both"}, function (response) {
-                        captureAdd(Item, response);
-                        chrome.tabs.remove(tabs[0].id);
-                    });
-                } else {
-                    captureAdd(Item, response);
-                }
-            });
+        chrome.tabs.query({'active': true, 'currentWindow': true}, function (tabs) {
+
+            captureAdd(Item, tabs[0].url);
         });
     }
 });
