@@ -1,0 +1,34 @@
+{
+  "name": "chrome-aria2-integration",
+  "version": "2.0.0",
+  "description": "Download files with aria2",
+  "main": "index.js",
+  "scripts": {
+    "build": "./node_modules/.bin/webpack",
+    "watch": "./node_modules/.bin/webpack -w"
+  },
+  "author": "rahuliyer95",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rahuliyer95/chrome-aria2-integration.git"
+  },
+  "devDependencies": {
+    "@types/chrome": "~0.0.46",
+    "@types/jquery": "2.0.47",
+    "@types/jquery.validation": "^1.16.3",
+    "@types/storejs": "^1.3.1",
+    "css-loader": "^0.28.4",
+    "node-sass": "^4.5.3",
+    "sass-loader": "^6.0.6",
+    "style-loader": "^0.18.2",
+    "ts-loader": "~2.0.3",
+    "typescript": "~2",
+    "webpack": "~2.4.1"
+  },
+  "dependencies": {
+    "bootstrap": "4.0.0-alpha.6",
+    "jquery-validation": "^1.16.0",
+    "store": "^1.3"
+  }
+}
