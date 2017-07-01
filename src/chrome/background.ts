@@ -1,6 +1,6 @@
 import * as store from "store";
-import { Settings } from "./settings";
-import { DownloadCapture, DownloadParams } from "./downloader";
+import { Settings } from "../downloader/settings";
+import { DownloadCapture, DownloadParams } from "../downloader/downloader";
 
 const settings = new Settings(store);
 const downloader = new DownloadCapture(settings);

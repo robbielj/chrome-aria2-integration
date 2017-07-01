@@ -48,16 +48,16 @@
     "message": "e.g microsoft.*, *google*"
   },
   "settings_site_blacklist": {
-    "message": "Site Whitelist"
+    "message": "Site Blacklist"
   },
   "settings_site_blacklist_desc": {
-    "message": "Downloads from these site are <u>always</u> handled by aria2, <strong><u>regardless of size or type</u></strong>"
+    "message": "Downloads from these site are <u>always</u> ignored by aria2, <strong><u>regardless of size or type</u></strong>"
   },
   "settings_site_blacklist_eg": {
     "message": "e.g microsoft.*, *google*"
   },
   "settings_protocol_whitelist": {
-    "message": "Site Whitelist"
+    "message": "Protocol Whitelist"
   },
   "settings_protocol_whitelist_desc": {
     "message": "Only downloads with these protocols are handled by aria2 <strong><u>based on size or type</u></strong>"

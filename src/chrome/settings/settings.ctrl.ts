@@ -1,7 +1,7 @@
 import * as store from "store";
 import * as $ from "jquery";
 import "jquery-validation";
-import { Settings } from "../settings";
+import { Settings } from "../../downloader/settings";
 
 /// CSS
 import "./settings.scss";
