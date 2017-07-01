@@ -17,7 +17,7 @@
     ],
     "persistent": false
   },
-  "options_page": "settings.html",
+  "options_page": "settings/settings.html",
   "permissions": [
     "contextMenus",
     "activeTab",
@@ -40,6 +40,7 @@
         "https://*/*"
       ],
       "js": [
+        "js/vendor.js",
         "js/inject.js"
       ]
     }

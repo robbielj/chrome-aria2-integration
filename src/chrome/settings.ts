@@ -58,6 +58,14 @@ export class Settings {
         this.settings.set('blacklistsite', sites);
     }
 
+    set protocolWhitelist(protocols: string[]) {
+        this.settings.set('protocolwhitelist', protocols);
+    }
+
+    get protocolWhitelist(): string[] {
+        return this.settings.get('protocolwhitelist') || ['blob', 'http', 'https'];
+    }
+
     get capture(): boolean {
         return this.settings.get('capture');
     }

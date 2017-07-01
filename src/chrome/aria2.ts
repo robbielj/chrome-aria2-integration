@@ -2,7 +2,7 @@ import { DownloadParams } from "./downloader";
 import { Settings } from "./settings";
 
 /// [authorizationToken, [urls], RequestParams]
-type RPCParams = any;
+type RPCParams = Array<string | string[] | DownloadParams>;
 
 interface RequestParams {
     jsonrpc: string;
@@ -42,9 +42,8 @@ export class Aria2 {
             xhr.setRequestHeader('Authorization',
                 `Basic ${btoa(this.settings.rpcUser + ':' + this.settings.rpcToken)})`);
         } else if (this.settings.rpcToken !== '') {
-            request.params = [`token:${this.settings.rpcToken}`].concat(request.params);
+            request.params = [`token:${this.settings.rpcToken}`, ...request.params];
         }
-        console.log(request);
         xhr.send(JSON.stringify(request));
     }
 }

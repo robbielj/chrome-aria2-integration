@@ -1,0 +1,71 @@
+{
+  "title": {
+    "message": "Aria2 Integration Settings"
+  },
+  "settings_enable_capture": {
+    "message": "Enable Capture"
+  },
+  "settings_json_rpc_path": {
+    "message": "JSON-RPC Path"
+  },
+  "settings_rpc_user": {
+    "message": "RPC User"
+  },
+  "settings_rpc_user_desc": {
+    "message": "Leave it blank unless you have specified"
+  },
+  "settings_rpc_secret": {
+    "message": "RPC Secret"
+  },
+  "settings_rpc_secret_desc": {
+    "message": "<strong>rpc-passwd</strong>/<strong>rpc-secret</strong> or leave it blank if neither is specified."
+  },
+  "settings_capture_file_size": {
+    "message": "Capture File Size"
+  },
+  "settings_capture_file_size_desc": {
+    "message": "If enabled, downloading a file with size larger than this value is automatically captured by aria2."
+  },
+  "settings_file_size": {
+    "message": "File Size"
+  },
+  "settings_file_types": {
+    "message": "File Types"
+  },
+  "settings_file_types_desc": {
+    "message": "These files are <u>always</u> handled by aria2"
+  },
+  "settings_file_types_eg": {
+    "message": "e.g rar,zip"
+  },
+  "settings_site_whitelist": {
+    "message": "Site Whitelist"
+  },
+  "settings_site_whitelist_desc": {
+    "message": "Downloads from these site are <u>always</u> handled by aria2, <strong><u>regardless of size or type</u></strong>"
+  },
+  "settings_site_whitelist_eg": {
+    "message": "e.g microsoft.*, *google*"
+  },
+  "settings_site_blacklist": {
+    "message": "Site Whitelist"
+  },
+  "settings_site_blacklist_desc": {
+    "message": "Downloads from these site are <u>always</u> handled by aria2, <strong><u>regardless of size or type</u></strong>"
+  },
+  "settings_site_blacklist_eg": {
+    "message": "e.g microsoft.*, *google*"
+  },
+  "settings_protocol_whitelist": {
+    "message": "Site Whitelist"
+  },
+  "settings_protocol_whitelist_desc": {
+    "message": "Only downloads with these protocols are handled by aria2 <strong><u>based on size or type</u></strong>"
+  },
+  "settings_protocol_whitelist_eg": {
+    "message": "e.g http,https,ftp"
+  },
+  "settings_save": {
+    "message": "Save"
+  }
+}

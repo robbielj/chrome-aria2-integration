@@ -66,22 +66,34 @@ export class DownloadCapture {
         const bSites = this.siteListProc(this.settings.join(this.settings.blackListSites)),
             wSites = this.siteListProc(this.settings.join(this.settings.whiteListSites)),
             wTypes = this.settings.whiteListTypes.map(type => type.toLocaleLowerCase()),
+            wProtocols = new RegExp(`^(${this.settings.join(this.settings.protocolWhitelist, '|')})`),
             fSize = this.settings.fileSize,
             fSizePrec = ['K', 'M', 'G', 'T'],
             fSizeBytes = parseFloat(fSize.match(/[\d\.]+/)[0]) *
                 Math.pow(1024, fSizePrec.indexOf(fSize.match(/[a-zA-Z]+/)[0].toUpperCase()) + 1);
-
+        
         switch (true) {
-            case url.substring(0, 5) === 'blob:':
-                return true;
+            // Skip blacklist sites
             case bSites.test(tabUrl):
                 return false;
+            // Accept whitelist sites
             case wSites.test(tabUrl):
                 return true;
-            case wTypes.indexOf(name.split('.').pop().toLocaleLowerCase()) !== -1:
-                return true;
-            case (size >= fSizeBytes && this.settings.sizeCapture):
-                return true;
+            // Protocol
+            case url.match(wProtocols) !== null:
+                switch (true) {
+                    // Accept whitelisted types
+                    case wTypes.indexOf(name.split('.').pop().toLocaleLowerCase()) !== -1:
+                        return true;
+                    // Accept if size capture is disabled
+                    case !this.settings.sizeCapture:
+                        return true;
+                    // Only accept above file sizes
+                    case (size >= fSizeBytes && this.settings.sizeCapture):
+                        return true;
+                    default:
+                        return false;
+                }
             default:
                 return false;
         }
