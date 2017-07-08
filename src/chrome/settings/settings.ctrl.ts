@@ -1,12 +1,12 @@
 import * as store from "store";
 import * as $ from "jquery";
 import "jquery-validation";
-import { Settings } from "../../downloader/settings";
+import { ChromeSettings } from "../settings";
 
 /// CSS
 import "./settings.scss";
 
-const settings = new Settings(store);
+const settings = new ChromeSettings(store);
 
 const loadSettings = () => {
     $('#enable-capture').prop('checked', settings.capture);

@@ -10,23 +10,12 @@ export interface DownloadParams {
     referer?: string;
 }
 
-export class DownloadCapture {
+export class Downloader {
 
     private aria2: Aria2;
 
     constructor(private settings: Settings) {
         this.aria2 = new Aria2(settings);
-    }
-
-    showNotification() {
-        const options = {
-            type: 'basic',
-            title: 'Aria2 Integration',
-            iconUrl: 'icons/notificationicon.png',
-            message: 'The download has been sent to aria2 queue'
-        };
-        chrome.notifications.create('senttoaria2', options, () => { });
-        window.setTimeout(() => chrome.notifications.clear('senttoaria2', () => { }), 3000);
     }
 
     getCookies(url: string, callback: GetCookiesCallback) {
@@ -39,30 +28,7 @@ export class DownloadCapture {
         });
     }
 
-    captureAdd(item: chrome.downloads.DownloadItem, tabUrl: string) {
-        if (this.isCapture(item.fileSize, tabUrl, item.url, item.filename)) {
-            this.getCookies(item.url, cookies => {
-                const params: DownloadParams = {};
-                params.referer = tabUrl;
-                params.header = 'Cookie:' + cookies;
-                params.out = item.filename;
-                chrome.downloads.cancel(item.id, () => this.addUri(item.url, params));
-            });
-        }
-    }
-
-    addUri(uri: string, options: DownloadParams) {
-        this.aria2.addUri(uri, options);
-        this.showNotification();
-    }
-
-    private siteListProc(site: string) {
-        return site === ''
-            ? new RegExp('^\\s$', 'g')
-            : new RegExp(site.replace(/\./g, '\\.').replace(/\,/g, '|').replace(/\*/g, '[^ ]*'), 'gi');
-    }
-
-    private isCapture(size: number, tabUrl: string, url: string, name: string): boolean {
+    isCapture(size: number, tabUrl: string, url: string, name: string): boolean {
         const bSites = this.siteListProc(this.settings.join(this.settings.blackListSites)),
             wSites = this.siteListProc(this.settings.join(this.settings.whiteListSites)),
             wTypes = this.settings.whiteListTypes.map(type => type.toLocaleLowerCase()),
@@ -71,7 +37,7 @@ export class DownloadCapture {
             fSizePrec = ['K', 'M', 'G', 'T'],
             fSizeBytes = parseFloat(fSize.match(/[\d\.]+/)[0]) *
                 Math.pow(1024, fSizePrec.indexOf(fSize.match(/[a-zA-Z]+/)[0].toUpperCase()) + 1);
-        
+
         switch (true) {
             // Skip blacklist sites
             case bSites.test(tabUrl):
@@ -89,7 +55,7 @@ export class DownloadCapture {
                     case !this.settings.sizeCapture:
                         return true;
                     // Only accept above file sizes
-                    case (size >= fSizeBytes && this.settings.sizeCapture):
+                    case size >= fSizeBytes:
                         return true;
                     default:
                         return false;
@@ -97,6 +63,16 @@ export class DownloadCapture {
             default:
                 return false;
         }
+    }
+    
+    addUri(uri: string, options: DownloadParams) {
+        this.aria2.addUri(uri, options);
+    }
+
+    private siteListProc(site: string) {
+        return site === ''
+            ? new RegExp('^\\s$', 'g')
+            : new RegExp(site.replace(/\./g, '\\.').replace(/\,/g, '|').replace(/\*/g, '[^ ]*'), 'gi');
     }
 
 }

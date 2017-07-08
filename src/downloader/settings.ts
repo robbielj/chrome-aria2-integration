@@ -1,86 +1,34 @@
-export class Settings {
-    constructor(private settings: StoreJSStatic) {
-    }
+export abstract class Settings {
 
-    get jsonRPCPath() {
-        return this.settings.get('rpcpath') || 'http://localhost:6800/jsonrpc';
-    }
+    abstract get jsonRPCPath();
+    abstract set jsonRPCPath(path: string);
 
-    set jsonRPCPath(path: string) {
-        this.settings.set('rpcpath', path);
-    }
+    abstract get rpcUser();
+    abstract set rpcUser(user: string);
 
-    get rpcUser(): string {
-        return this.settings.get('rpcuser') || '';
-    }
+    abstract get rpcToken();
+    abstract set rpcToken(token: string);
 
-    set rpcUser(user: string) {
-        this.settings.set('rpcuser', user);
-    }
+    abstract get fileSize();
+    abstract set fileSize(size: string);
 
-    get rpcToken(): string {
-        return this.settings.get('rpctoken') || '';
-    }
+    abstract get whiteListTypes();
+    abstract set whiteListTypes(types: string[]);
 
-    set rpcToken(token: string) {
-        this.settings.set('rpctoken', token);
-    }
+    abstract get whiteListSites();
+    abstract set whiteListSites(sites: string[]);
 
-    get fileSize(): string {
-        return this.settings.get('filesize') || '500M';
-    }
+    abstract get blackListSites();
+    abstract set blackListSites(sites: string[]);
 
-    set fileSize(size: string) {
-        this.settings.set('filesize', size);
-    }
+    abstract get protocolWhitelist();
+    abstract set protocolWhitelist(protocols: string[]);
 
-    get whiteListTypes(): string[] {
-        return this.settings.get('whitelisttype') || [];
-    }
+    abstract get capture();
+    abstract set capture(value: boolean);
 
-    set whiteListTypes(types: string[]) {
-        this.settings.set('whitelisttype', types);
-    }
-
-    get whiteListSites(): string[] {
-        return this.settings.get('whitelistsite') || [];
-    }
-
-    set whiteListSites(sites: string[]) {
-        this.settings.set('whitelistsite', sites);
-    }
-
-    get blackListSites(): string[] {
-        return this.settings.get('blacklistsite') || [];
-    }
-
-    set blackListSites(sites: string[]) {
-        this.settings.set('blacklistsite', sites);
-    }
-
-    set protocolWhitelist(protocols: string[]) {
-        this.settings.set('protocolwhitelist', protocols);
-    }
-
-    get protocolWhitelist(): string[] {
-        return this.settings.get('protocolwhitelist') || ['blob', 'http', 'https'];
-    }
-
-    get capture(): boolean {
-        return this.settings.get('capture');
-    }
-
-    set capture(value: boolean) {
-        this.settings.set('capture', value);
-    }
-
-    get sizeCapture(): boolean {
-        return this.settings.get('sizecapture');
-    }
-
-    set sizeCapture(value: boolean) {
-        this.settings.set('sizecapture', value);
-    }
+    abstract get sizeCapture();
+    abstract set sizeCapture(value: boolean);
 
     join(values: string[], sep: string = ','): string {
         let result = '';

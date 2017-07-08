@@ -1,9 +1,20 @@
 import * as store from "store";
-import { Settings } from "../downloader/settings";
-import { DownloadCapture, DownloadParams } from "../downloader/downloader";
+import { ChromeSettings } from "./settings";
+import { Downloader } from "../downloader/downloader";
 
-const settings = new Settings(store);
-const downloader = new DownloadCapture(settings);
+const settings = new ChromeSettings(store);
+const downloader = new Downloader(settings);
+
+const showNotification = () => {
+    const options = {
+        type: 'basic',
+        title: 'Aria2 Integration',
+        iconUrl: 'icons/notificationicon.png',
+        message: 'The download has been sent to aria2 queue'
+    };
+    chrome.notifications.create('senttoaria2', options, () => { });
+    window.setTimeout(() => chrome.notifications.clear('senttoaria2', () => { }), 3000);
+};
 
 chrome.contextMenus.create({
     title: 'Download with aria2',
@@ -17,10 +28,11 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
             active: true,
             currentWindow: true
         }, tabs => downloader.getCookies(info.linkUrl, cookies => {
-            const params: DownloadParams = {};
-            params.referer = tabs[0].url;
-            params.header = 'Cookie:' + cookies
-            this.downloader.addUri(info.linkUrl, params);
+            downloader.addUri(info.linkUrl, {
+                referer: tabs[0].url,
+                header: 'Cookie:' + cookies
+            });
+            showNotification();
         }));
     }
 });
@@ -30,6 +42,19 @@ chrome.downloads.onDeterminingFilename.addListener(item => {
         chrome.tabs.query({
             'active': true,
             'currentWindow': true
-        }, tabs => downloader.captureAdd(item, tabs[0].url));
+        }, tabs => {
+            if (downloader.isCapture(item.fileSize, tabs[0].url, item.url, item.filename)) {
+                downloader.getCookies(item.url, cookies => {
+                    chrome.downloads.cancel(item.id, () => {
+                        downloader.addUri(item.url, {
+                            referer: tabs[0].url,
+                            header: 'Cookie:' + cookies,
+                            out: item.filename
+                        });
+                        showNotification();
+                    });
+                });
+            }
+        });
     }
 });

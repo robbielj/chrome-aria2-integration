@@ -1,14 +1,12 @@
-const webpack = require('webpack');
-const path = require('path');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const HtmlMinifier = require('html-minifier').minify;
-const jsonminify = require('jsonminify');
+var webpack = require('webpack');
+var path = require('path');
 
 module.exports = {
     entry: {
         'chrome/js/background': path.join(__dirname, 'src/chrome/background.ts'),
         'chrome/js/inject': path.join(__dirname, 'src/chrome/inject.ts'),
-        'chrome/settings/settings': path.join(__dirname, 'src/chrome/settings/settings.ctrl.ts')
+        'chrome/settings/settings': path.join(__dirname, 'src/chrome/settings/settings.ctrl.ts'),
+        'safari.safariextension/js/context': path.join(__dirname, 'src/safari/context.ts')
     },
     output: {
         path: path.join(__dirname, 'dist'),
@@ -35,40 +33,11 @@ module.exports = {
         extensions: ['.ts', '.tsx', '.js']
     },
     plugins: [
-        // minify
         new webpack.optimize.UglifyJsPlugin(),
-        new webpack.optimize.CommonsChunkPlugin({
-            name: './chrome/js/vendor' // Specify the common bundle's name.
-        }),
-        new CopyWebpackPlugin([
-            {
-                from: 'src/chrome/manifest.json',
-                to: './chrome',
-                transform: function (content) {
-                    return jsonminify(content.toString('utf8'));
-                }
-            },
-            {
-                from: 'src/icons',
-                to: './chrome/icons'
-            },
-            {
-                from: 'src/chrome/_locales',
-                to: './chrome/_locales'
-            },
-            {
-                from: 'src/chrome/settings/settings.html',
-                to: './chrome/settings/settings.html',
-                transform: function (content) {
-                    return HtmlMinifier(content.toString('utf8'), {
-                        collapseWhitespace: true,
-                        collapseInlineTagWhitespace: true,
-                        minifyCSS: true,
-                        sortAttributes: true,
-                        sortClassNames: true
-                    });
-                }
-            }
-        ])
+        new webpack.optimize.CommonsChunkPlugin('vendor'),
+        new webpack.ProvidePlugin({
+            '$': 'jquery',
+            'jQuery': 'jquery'
+        })
     ]
 };

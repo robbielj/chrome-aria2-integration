@@ -20,8 +20,12 @@
             "args": ["run", "test"]
         },
         {
-            "taskName": "build",
-            "args": ["run", "watch"]
+            "taskName": "safari",
+            "args": ["run", "safari"]
+        },
+        {
+            "taskName": "chrome",
+            "args": ["run", "chrome"]
         }
     ]
 }
