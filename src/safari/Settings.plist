@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>Key</key>
+		<string>capture</string>
+		<key>Title</key>
+		<string>Enable Capture</string>
+		<key>Type</key>
+		<string>CheckBox</string>
+	</dict>
+	<dict>
+		<key>DefaultValue</key>
+		<string>http://localhost:6800/jsonrpc</string>
+		<key>Key</key>
+		<string>rpcpath</string>
+		<key>Password</key>
+		<false/>
+		<key>Title</key>
+		<string>JSON-RPC Path</string>
+		<key>Type</key>
+		<string>TextField</string>
+	</dict>
+	<dict>
+		<key>Key</key>
+		<string>rpcuser</string>
+		<key>Password</key>
+		<false/>
+		<key>Title</key>
+		<string>RPC User</string>
+		<key>Type</key>
+		<string>TextField</string>
+	</dict>
+	<dict>
+		<key>Key</key>
+		<string>rpctoken</string>
+		<key>Password</key>
+		<true/>
+		<key>Title</key>
+		<string>RPC Secret</string>
+		<key>Type</key>
+		<string>TextField</string>
+	</dict>
+	<dict>
+		<key>Key</key>
+		<string>whitelisttype</string>
+		<key>Password</key>
+		<false/>
+		<key>Title</key>
+		<string>File Types</string>
+		<key>Type</key>
+		<string>TextField</string>
+	</dict>
+	<dict>
+		<key>Key</key>
+		<string>whitelistsite</string>
+		<key>Password</key>
+		<false/>
+		<key>Title</key>
+		<string>Site Whitelist</string>
+		<key>Type</key>
+		<string>TextField</string>
+	</dict>
+	<dict>
+		<key>Key</key>
+		<string>blacklistsite</string>
+		<key>Password</key>
+		<false/>
+		<key>Title</key>
+		<string>Site Blacklist</string>
+		<key>Type</key>
+		<string>TextField</string>
+	</dict>
+	<dict>
+		<key>Key</key>
+		<string>protocolwhitelist</string>
+		<key>Password</key>
+		<false/>
+		<key>Title</key>
+		<string>Protocol Whitelist</string>
+		<key>Type</key>
+		<string>TextField</string>
+	</dict>
+</array>
+</plist>
